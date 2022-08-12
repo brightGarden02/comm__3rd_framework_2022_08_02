@@ -6,6 +6,9 @@ import com.ll.exam.annotation.Autowired;
 import com.ll.exam.annotation.Controller;
 import com.ll.exam.annotation.GetMapping;
 import com.ll.exam.article.service.ArticleService;
+import com.ll.exam.dto.ArticleDto;
+
+import java.util.List;
 
 @Controller // ArticleController가 컨트롤러이다.
 public class ArticleController {
@@ -18,7 +21,10 @@ public class ArticleController {
     @GetMapping("/usr/article/list/{boardCode}")
     // 아래 showList 는 Get /usr/article/list 으로 요청이 왔을 때 실행 되어야 하는 함수
     public void showList(Rq rq){
-        rq.println("게시물 리스트");
+        List<ArticleDto> articleDtos = articleService.getArticles();
+
+        rq.setAttr("articles", articleDtos);
+        rq.view("usr/article/list");
     }
 
     @GetMapping("/usr/article/detail/{boardCode}/{id}")

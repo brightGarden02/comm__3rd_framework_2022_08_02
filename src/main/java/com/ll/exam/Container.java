@@ -6,6 +6,7 @@ import com.ll.exam.annotation.Repository;
 import com.ll.exam.annotation.Service;
 import com.ll.exam.article.controller.ArticleController;
 import com.ll.exam.home.controller.HomeController;
+import com.ll.exam.mymap.MyMap;
 import com.ll.exam.util.Ut;
 import org.reflections.Reflections;
 
@@ -29,8 +30,15 @@ public class Container {
         scanServices();
         scanControllers();
 
+        scanCustom();
+
         // 레고 조립
         resolveDependenciesAllComponents();
+    }
+
+    private static void scanCustom() {
+        objects.put(MyMap.class, new MyMap(App.DB_HOST, App.DB_PORT, App.DB_ID, App.DB_PASSWORD, App.DB_NAME));
+
     }
 
     private static void scanRepositories() {

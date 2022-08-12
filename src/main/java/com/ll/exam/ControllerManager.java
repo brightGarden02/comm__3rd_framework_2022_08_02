@@ -2,6 +2,7 @@ package com.ll.exam;
 
 import com.ll.exam.annotation.Controller;
 import com.ll.exam.annotation.GetMapping;
+import com.ll.exam.mymap.MyMap;
 import com.ll.exam.util.Ut;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -90,7 +91,13 @@ public class ControllerManager {
         } catch (IllegalAccessException e) {
             rq.println("액션시작에 실패하였습니다.");
         } catch (InvocationTargetException e) {
-            rq.println("액션시작에 실패하였습니다.");
+            throw new RuntimeException(e);
+            //rq.println("액션시작에 실패하였습니다.");
+        } finally {
+            MyMap myMap = Container.getObj(MyMap.class);
+            myMap.closeConnection(); // 현재 쓰레드에 할당된 커넥션을 닫는다.
+            // 안하면 벌어지는 일
+            // 매 요청마다, DB 요청이 쌓인다.
         }
     }
 
