@@ -24,4 +24,13 @@ public class AppTest {
         assertThat(articleController).isNotNull();
     }
 
+
+    @Test
+    public void ioc__articleContoller__싱글톤() {
+        ArticleController articleController1 = Container.getArticleController();
+        ArticleController articleController2 = Container.getArticleController();
+
+        assertThat(articleController2).isEqualTo(articleController1);
+    }
+
 }
