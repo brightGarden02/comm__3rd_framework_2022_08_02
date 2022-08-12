@@ -3,9 +3,12 @@ package com.ll.exam.article.controller;
 
 import com.ll.exam.annotation.Controller;
 import com.ll.exam.annotation.GetMapping;
+import com.ll.exam.service.ArticleService;
 
 @Controller // ArticleController가 컨트롤러이다.
 public class ArticleController {
+
+    private ArticleService articleService;
 
 
     // /usr/article/list/free 와 같이 관련된 요청을 처리하는 함수이다.

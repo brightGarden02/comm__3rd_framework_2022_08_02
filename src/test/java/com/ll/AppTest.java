@@ -3,6 +3,7 @@ package com.ll;
 import com.ll.exam.Container;
 import com.ll.exam.article.controller.ArticleController;
 import com.ll.exam.home.controller.HomeController;
+import com.ll.exam.service.ArticleService;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -61,5 +62,20 @@ public class AppTest {
 //        assertThat(names).contains("article");
 //
 //    }
+
+    @Test
+    public void ioc__articleService() {
+        ArticleService articleService = Container.getObj(ArticleService.class);
+
+        assertThat(articleService).isNotNull();
+    }
+
+    @Test
+    public void ioc__articleService__싱글톤() {
+        ArticleService articleService1 = Container.getObj(ArticleService.class);
+        ArticleService articleService2 = Container.getObj(ArticleService.class);
+
+        assertThat(articleService2).isEqualTo(articleService1);
+    }
 
 }
