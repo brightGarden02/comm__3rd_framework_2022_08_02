@@ -1,6 +1,7 @@
 package com.ll.exam.article.controller;
 
 
+import com.ll.exam.Rq;
 import com.ll.exam.annotation.Autowired;
 import com.ll.exam.annotation.Controller;
 import com.ll.exam.annotation.GetMapping;
@@ -16,13 +17,16 @@ public class ArticleController {
     // /usr/article/list/free 와 같이 관련된 요청을 처리하는 함수이다.
     @GetMapping("/usr/article/list/{boardCode}")
     // 아래 showList 는 Get /usr/article/list 으로 요청이 왔을 때 실행 되어야 하는 함수
-    public void showList(){
-
+    public void showList(Rq rq){
+        rq.println("게시물 리스트");
     }
 
-    @GetMapping("/usr/article/detail/{boardCode}")
-    public void showDetail() {
+    @GetMapping("/usr/article/detail/{boardCode}/{id}")
+    public void showDetail(Rq rq) {
+        rq.println("게시물 수정페이지");
 
+        long id = rq.getLongPathValueByIndex(1, -1);
+        // long id = rq.getLongParam("id"); // 곧 기능 구현
     }
 
 }
