@@ -22,8 +22,8 @@ public class Container {
         objects.put(HomeController.class, new HomeController());
     }
 
-    public static Object getObj(Class cls) {
-        return objects.get(cls);
+    public static <T> T getObj(Class<T> cls) {
+        return (T) objects.get(cls);
     }
 
 
