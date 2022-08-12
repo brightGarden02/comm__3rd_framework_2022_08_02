@@ -1,4 +1,4 @@
-package com.ll.exam.article.dto;
+package com.ll.exam;
 
 import lombok.Data;
 

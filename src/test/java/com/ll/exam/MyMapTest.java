@@ -1,6 +1,5 @@
-package com.ll;
+package com.ll.exam;
 
-import com.ll.exam.article.dto.ArticleDto;
 import com.ll.exam.mymap.MyMap;
 import com.ll.exam.mymap.SecSql;
 import org.junit.jupiter.api.BeforeAll;
@@ -16,9 +15,8 @@ import java.util.Map;
 import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.TestInstance.Lifecycle.PER_CLASS;
 
-@TestInstance(PER_CLASS)
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class MyMapTest {
     private MyMap myMap;
 
