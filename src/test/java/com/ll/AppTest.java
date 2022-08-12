@@ -1,12 +1,12 @@
 package com.ll;
 
 import com.ll.exam.Container;
+import com.ll.exam.Ut;
 import com.ll.exam.article.controller.ArticleController;
+import com.ll.exam.article.repository.ArticleRepository;
 import com.ll.exam.home.controller.HomeController;
-import com.ll.exam.service.ArticleService;
+import com.ll.exam.article.service.ArticleService;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -82,9 +82,18 @@ public class AppTest {
     public void articleController를_생성할때_articleService도_같이_생성() {
         ArticleController articleController = Container.getObj(ArticleController.class);
 
-        ArticleService articleService = articleController.getArticleServiceForTest();
+        ArticleService articleService = Ut.reflection.getFieldValue(articleController, "articleService", null);
 
         assertThat(articleService).isNotNull();
+    }
+
+    @Test
+    public void articleService를_생성할때_articleRepository도_같이_생성() {
+        ArticleService articleService = Container.getObj(ArticleService.class);
+
+        ArticleRepository articleRepository = Ut.reflection.getFieldValue(articleService, "articleRepository", null);
+
+        assertThat(articleRepository).isNotNull();
     }
 
 }
