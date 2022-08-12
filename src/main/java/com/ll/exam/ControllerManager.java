@@ -2,6 +2,7 @@ package com.ll.exam;
 
 import com.ll.exam.annotation.Controller;
 import com.ll.exam.annotation.GetMapping;
+import com.ll.exam.util.Ut;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.reflections.Reflections;
@@ -40,16 +41,37 @@ public class ControllerManager {
                 }
 
                 if(path != null && httpMethod != null) {
-                    String key = httpMethod + "___" + path;
+                    String actionPath = Ut.str.beforeFrom(path, "/", 4);
 
-                    routeInfos.put(key, new RouteInfo(path, method));
+                    String key = httpMethod + "___" + actionPath;
+
+                    routeInfos.put(key, new RouteInfo(path, actionPath, method));
                 }
             }
         }
 
     }
 
+
     public static void runAction(HttpServletRequest request, HttpServletResponse response) {
+        Rq rq = new Rq(request, response);
+
+        String routeMethod = rq.getRouteMethod();
+        String actionPath = rq.getActionPath();
+
+        String mappingKey = routeMethod + "___" + actionPath;
+
+        System.out.println(mappingKey);
+        System.out.println(routeInfos.keySet());
+
+        boolean contains = routeInfos.containsKey(mappingKey);
+
+        if (contains == false) {
+            rq.println("해당 요청은 존재하지 않습니다.");
+            return;
+        }
+
+        rq.println("해당 요청은 존재합니다.");
 
     }
 

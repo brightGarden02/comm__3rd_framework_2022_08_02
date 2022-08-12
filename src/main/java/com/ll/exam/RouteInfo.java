@@ -8,5 +8,6 @@ import java.lang.reflect.Method;
 public class RouteInfo {
 
     private String path;
+    private String actionPath;
     private Method method;
 }
