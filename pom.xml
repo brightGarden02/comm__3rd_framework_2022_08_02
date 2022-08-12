@@ -55,6 +55,13 @@
             <version>2.13.3</version>
         </dependency>
 
+        <!-- 컴포넌트 스캔 reflections -->
+        <dependency>
+            <groupId>org.reflections</groupId>
+            <artifactId>reflections</artifactId>
+            <version>0.10.2</version>
+        </dependency>
+
     </dependencies>
 
     <properties>
